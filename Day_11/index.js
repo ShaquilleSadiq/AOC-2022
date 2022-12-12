@@ -75,4 +75,4 @@ const newMonkey = (monkey) => {
 const readFile = (filename) => fs.readFileSync(path.join(__dirname, filename), "utf8").split("\n\n");
 
 main("P1:", 20, (item) => Math.floor(item / 3));
-main("P1:", 10000, (item) => item % modnum);
+main("P2:", 10000, (item) => item % modnum);
