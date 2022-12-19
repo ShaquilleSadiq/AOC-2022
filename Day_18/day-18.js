@@ -7,6 +7,7 @@ let lava_voxels = [];
 let space = [];
 let water_voxels = [];
 let surface_area = 0;
+let p2_progress = 0;
 
 const init = () => {
     points = readFile();
@@ -62,9 +63,15 @@ const fillWater = (points) => {
 
     while(q.length > 0){
         const voxel = q.shift();
+        const [x, y, z] = voxel;
 
         if(pointInArr(water_voxels, voxel)) continue;
         water_voxels.push(voxel);
+        console.clear();
+
+        p2_progress = water_voxels.length / (max.x * max.y * max.z) * 100;
+
+        // console.log(water_voxels.length, "/", (max.x * max.y * max.z), "=", p2_progress.toFixed(2));
 
         for(let neighbour of neighbours(voxel)){
             if(!neighbour) continue;
@@ -146,4 +153,4 @@ const checkZ = (voxel, ignore_area = false) => {
 
 const readFile = () => fs.readFileSync(path.join(__dirname, 'input.txt'), "utf8").split("\n");
 
-module.exports = { p1, p2, init, water_voxels, lava_voxels, max }
+module.exports = { p1, p2, init, water_voxels, lava_voxels, max, p2_progress }
